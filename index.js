@@ -22,7 +22,7 @@ server.route({
     path: '/{param*}',
     handler: {
         directory: {
-            path: './',
+            path: '../test.html',
             listing: true
         }
     }
