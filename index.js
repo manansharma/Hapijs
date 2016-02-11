@@ -23,9 +23,7 @@ server.route({
     handler: {
         directory: {
             path: '.',
-            file: '../page.html',
-            redirectToSlash: true,
-            index: true,
+            file: '../page.html',          
             listing: true
         }
     }
