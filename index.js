@@ -1,23 +1,35 @@
 const Hapi = require('hapi');
 const Path = require('path');
-const Inert  = require('inert');
+//const Inert  = require('inert');
 
-const server = new Hapi.Server({
-    /*connections: {
-        routes: {
-            files: {
-                relativeTo: Path.join(__dirname, 'public')
-            }
-        }
-    }
-}*/
-
-);
+const server = new Hapi.Server({});
 server.connection({ port: 3000 });
+//server.register(Inert, () => {});
 
-server.register(Inert, () => {});
+server.register(require('inert'), (err) => {
 
-server.route({
+    if (err) {
+        throw err;
+    }
+
+    server.route({
+        method: 'GET',
+        path: '/picture.jpg',
+        handler: function (request, reply) {
+            reply.file('/path/to/picture.jpg');
+        }
+    });
+
+    server.start((err) => {
+
+        if (err) {
+            throw err;
+        }
+
+        console.log('Server running at:', server.info.uri);
+    });
+});
+/*server.route({
     method: 'GET',
     path: '/{param*}',
     handler: {
@@ -37,7 +49,7 @@ server.start((err) => {
     console.log('Server running at:', server.info.uri);
 });
 
-/*server.route({
+server.route({
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
