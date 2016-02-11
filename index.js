@@ -22,8 +22,8 @@ server.route({
     path: '/{param*}',
     handler: {
         directory: {
-            path: './',                  
-            listing: true
+            path: './',
+            listing: false
         }
     }
 });
