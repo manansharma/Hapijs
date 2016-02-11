@@ -3,14 +3,14 @@ const Path = require('path');
 const Inert  = require('inert');
 
 const server = new Hapi.Server({
-    connections: {
+    /*connections: {
         routes: {
             files: {
                 relativeTo: Path.join(__dirname, 'public')
             }
         }
     }
-}
+}*/
 
 );
 server.connection({ port: 3000 });
