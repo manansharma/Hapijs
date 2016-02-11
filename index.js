@@ -23,7 +23,7 @@ server.route({
     handler: {
         directory: {
             path: '.',
-            file: '../page.html',          
+            file: '..%2page.html',          
             listing: true
         }
     }
