@@ -6,7 +6,7 @@ const server = new Hapi.Server({});
 server.connection({ port: 3000 });
 //server.register(Inert, () => {});
 
-server.register(require('inert'), (err) => {
+/*server.register(require('inert'), (err) => {
 
     if (err) {
         throw err;
@@ -29,7 +29,7 @@ server.register(require('inert'), (err) => {
         console.log('Server running at:', server.info.uri);
     });
 });
-/*server.route({
+server.route({
     method: 'GET',
     path: '/{param*}',
     handler: {
@@ -38,7 +38,7 @@ server.register(require('inert'), (err) => {
             listing: true
         }
     }
-});
+});*/
 
 server.start((err) => {
 
@@ -49,6 +49,17 @@ server.start((err) => {
     console.log('Server running at:', server.info.uri);
 });
 
+server.state('demo', {
+  ttl: 30 * 1000,     // 30 seconds
+  isHttpOnly: false,
+  isSecure: true,
+  path: '/',
+  encoding: 'base64json',
+  sign: {
+    password : 'demo'
+  }
+});
+
 server.route({
     method: 'GET',
     path: '/',
@@ -57,7 +68,7 @@ server.route({
     }
 });
 
-server.route({
+/*server.route({
     method: 'GET',
     path: '/{name}',
     handler: function (request, reply) {
