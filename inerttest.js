@@ -6,11 +6,21 @@ server.register(require('inert'), (err) => {
         throw err;
     }
 
-    server.route({
+    /*server.route({
         method: 'GET',
         path: '/picture.jpg',
         handler: function (request, reply) {
             reply.file('/picture.jpg');
+        }
+    });*/
+
+    server.route({
+        method: 'GET',
+        path: '/{filename}',
+        handler: {
+            file: function (request) {
+                return request.params.filename;
+            }
         }
     });
 
