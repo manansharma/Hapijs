@@ -12,7 +12,7 @@ server.register(require('inert'), (err) => {
         handler: function (request, reply) {
             reply.file('/picture.jpg');
         }
-    });*/
+    });
 
     server.route({
         method: 'GET',
@@ -21,6 +21,15 @@ server.register(require('inert'), (err) => {
             file: function (request) {
                 return request.params.filename;
             }
+        }
+    });*/
+
+    server.route({
+        method: 'GET',
+        path: '/documents/{user}/{file}',
+        handler: function(request, reply) {
+            var path = Path.join(request.params.user, request.params.file);
+            return reply.file(path);
         }
     });
 
