@@ -1,30 +1,35 @@
 const hapi = require('hapi');
 
-const server = new hapi.Server();
+server.register(require('inert'), (err) => {
 
-server.connection({
-  host: 'localhost',
-  address: '127.0.0.1',
-  port: 3000,
+    if (err) {
+        throw err;
+    }
+
+    /*server.route({
+        method: 'GET',
+        path: '/picture.jpg',
+        handler: function (request, reply) {
+            reply.file('/picture.jpg');
+        }
+    });*/
+
+    server.route({
+        method: 'GET',
+        path: '/{filename}',
+        handler: {
+            file: function (request) {
+                return request.params.filename;
+            }
+        }
+    });
+
+    server.start((err) => {
+
+        if (err) {
+            throw err;
+        }
+
+        console.log('Server running at:', server.info.uri);
+    });
 });
-
-server.register({
-  register: require('hapi-server-session'),
-  options: {
-    cookie: {
-      isSecure: false,
-      isHttpOnly: false
-    },
-  },
-}, function (err) { if (err) { throw err; } });
-
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: function (request, reply) {
-    request.session.views = request.session.views + 1 || 1;
-    reply('Views: ' + request.session.views);
-  },
-});
-
-server.start();
