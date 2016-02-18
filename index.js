@@ -1,73 +1,30 @@
-const Path = require('path');
-const Hapi = require('hapi');
-const Inert = require('inert');
+const hapi = require('hapi');
 
-const server = new Hapi.Server({
-    connections: {
-        routes: {
-            files: {
-                relativeTo: Path.join(__dirname, 'public')
-            }
-        }
-    }
+const server = new hapi.Server();
+
+server.connection({
+  host: 'localhost',
+  address: '127.0.0.1',
+  port: 3000,
 });
-server.connection({ port: 3000 });
 
-server.register(Inert, () => {});
-
-/*server.route({
-    method: 'GET',
-    path: '/{param*}',
-    handler: {
-        directory: {
-            path: '.',
-            redirectToSlash: true,
-            index: true
-        }
-    }
-});*/
+server.register({
+  register: require('hapi-server-session'),
+  options: {
+    cookie: {
+      isSecure: false,
+      isHttpOnly: false
+    },
+  },
+}, function (err) { if (err) { throw err; } });
 
 server.route({
-    method: 'GET',
-    path: '/documents/{user}/{file}',
-    handler: function(request, reply) {
-        var path = Path.join(request.params.user, request.params.file);
-        return reply.file(path);
-    }
+  method: 'GET',
+  path: '/',
+  handler: function (request, reply) {
+    request.session.views = request.session.views + 1 || 1;
+    reply('Views: ' + request.session.views);
+  },
 });
 
-server.start((err) => {
-
-    if (err) {
-        throw err;
-    }
-
-    console.log('Server running at:', server.info.uri);
-});
-
-/*server.register(require('inert'), (err) => {
-
-    if (err) {
-        throw err;
-    }
-
-
-
-    server.route({
-        method: 'GET',
-        path: '/documents/{user}/{file}',
-        handler: function(request, reply) {
-            var path = Path.join(request.params.user, request.params.file);
-            return reply.file(path);
-        }
-    });
-
-    server.start((err) => {
-
-        if (err) {
-            throw err;
-        }
-
-        console.log('Server running at:', server.info.uri);
-    });
-});*/
+server.start();
