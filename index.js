@@ -1,5 +1,4 @@
 const hapi = require('hapi');
-
 const server = new hapi.Server();
 
 server.connection({
@@ -12,7 +11,8 @@ server.register({
   register: require('hapi-server-session'),
   options: {
     cookie: {
-      isSecure: false,     
+      isSecure: true,
+      isHttpOnly: false
     },
   },
 }, function (err) { if (err) { throw err; } });
