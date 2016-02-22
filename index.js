@@ -17,6 +17,8 @@ server.register({
   },
 }, function (err) { if (err) { throw err; } });
 
+const cache = server.cache({ segment: 'countries', expiresIn: 60 * 60 * 1000 });
+
 server.route({
   method: 'GET',
   path: '/',
