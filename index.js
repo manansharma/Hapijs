@@ -12,7 +12,7 @@ server.register({
   options: {
     cookie: {
       isSecure: true,
-      isHttpOnly: false
+      isHttpOnly: true
     },
   },
 }, function (err) { if (err) { throw err; } });
