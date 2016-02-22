@@ -10,10 +10,7 @@ server.connection({
 server.register({
   register: require('hapi-server-session'),
   options: {
-    cookie: {
-      isSecure: false,
-      isHttpOnly: true
-    },
+    cookie: {},
   },
 }, function (err) { if (err) { throw err; } });
 
