@@ -11,8 +11,8 @@ server.register({
   register: require('hapi-server-session'),
   options: {
     cookie: {
-      isSecure: false,
-      isHttpOnly: false
+      isSecure: true,
+      isHttpOnly: true
     },
   },
 }, function (err) { if (err) { throw err; } });
