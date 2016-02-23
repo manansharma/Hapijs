@@ -1,5 +1,6 @@
 const hapi = require('hapi');
 const server = new hapi.Server();
+var cryptiles = require('cryptiles');
 
 server.connection({
   host: 'localhost',
@@ -11,10 +12,11 @@ server.register({
   register: require('hapi-server-session'),
   options: {
     cookie: {
-      isSecure: true,
+      isSecure: false,
       isHttpOnly: true
     },
-    //expiresIn: 9000000
+    expiresIn: 9000000,
+    key: cryptiles.randomString(16);
   },
 }, function (err) { if (err) { throw err; } });
 
