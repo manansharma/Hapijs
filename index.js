@@ -16,7 +16,7 @@ server.register({
       isHttpOnly: false
     },
     expiresIn: 9000000,
-    key: cryptiles.randomString(16);
+    //key: cryptiles.randomString(16);
   },
 }, function (err) { if (err) { throw err; } });
 
