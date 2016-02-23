@@ -12,9 +12,9 @@ server.register({
   options: {
     cookie: {
       isSecure: true,
-      isHttpOnly: true
+      //isHttpOnly: false
     },
-    expiresIn: 90000000
+    //expiresIn: 9000000
   },
 }, function (err) { if (err) { throw err; } });
 
