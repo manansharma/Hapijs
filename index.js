@@ -14,10 +14,11 @@ server.register({
       isSecure: true,
       isHttpOnly: true
     },
+    expiresIn: 60 * 60 * 1000
   },
 }, function (err) { if (err) { throw err; } });
 
-const cache = server.cache({ segment: 'countries', expiresIn: 60 * 60 * 1000 });
+//const cache = server.cache({ segment: 'countries', expiresIn: 60 * 60 * 1000 });
 
 server.route({
   method: 'GET',
