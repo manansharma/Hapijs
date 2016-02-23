@@ -14,7 +14,7 @@ server.register({
       isSecure: true,
       isHttpOnly: true
     },
-    expiresIn: 20
+    expiresIn: 16 * 60
   },
 }, function (err) { if (err) { throw err; } });
 
