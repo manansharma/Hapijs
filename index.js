@@ -12,7 +12,7 @@ server.register({
   options: {
     cookie: {
       isSecure: true,
-      isHttpOnly: true
+      isHttpOnly: false
     },
     expiresIn: 1200000
   },
