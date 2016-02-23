@@ -11,10 +11,10 @@ server.register({
   register: require('hapi-server-session'),
   options: {
     cookie: {
-      isSecure: true,
+      isSecure: false,
       isHttpOnly: true
     },
-    expiresIn: 1200000
+    expiresIn: 900000
   },
 }, function (err) { if (err) { throw err; } });
 
