@@ -12,7 +12,7 @@ server.register({
   register: require('hapi-server-session'),
   options: {
     cookie: {
-      //isSecure: true,
+      isSecure: false,
       isHttpOnly: false
     },
     expiresIn: 9000000,
