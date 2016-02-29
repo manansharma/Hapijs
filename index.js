@@ -8,6 +8,7 @@ server.connection({
   port: 3000,
 });
 
+//Hapi Server Session Tests
 server.register({
   register: require('hapi-server-session'),
   options: {
@@ -30,5 +31,18 @@ server.route({
     reply('Views: ' + request.session.views);
   },
 });
+
+/*Hapi Inert File Inclusion Test
+server.register(Inert, () => {});
+
+server.route({
+    method: 'GET',
+    path: '/documents/{user}/{file}',
+    handler: function(request, reply) {
+        var path = Path.join(request.params.user, request.params.file);
+        return reply.file(path);
+    }
+});
+End of Inert File Inclusion Test*/
 
 server.start();
