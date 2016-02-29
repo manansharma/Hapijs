@@ -9,7 +9,7 @@ server.connection({
 });
 
 //Hapi Server Session Tests
-require('./hapi-server-session-test/hapi.server.session.test.js');
+require('./hapi-server-session-test/hapi.server.session.test.js')(app);
 
 server.route({
   method: 'GET',
