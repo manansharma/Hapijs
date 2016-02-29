@@ -1,6 +1,5 @@
 {
   "name": "hapijs",
-  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,10 +7,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "good": "^6.4.0",
-    "good-console": "^5.3.0",
+  "dependencies": {    
     "hapi": "^13.0.0",
+    "hapi-server-session": "^2.0.4",
     "inert": "^3.2.0",
     "path": "^0.12.7"
   }
