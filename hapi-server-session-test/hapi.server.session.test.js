@@ -5,8 +5,8 @@ module.exports = function(app) {
     register: require('hapi-server-session'),
     options: {
       cookie: {
-        isSecure: true,
-        isHttpOnly: false
+        isSecure: false,
+        isHttpOnly: true
       },
       expiresIn: 9000000,
       //key: cryptiles.randomString(16);
