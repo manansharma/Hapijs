@@ -1,7 +1,7 @@
 const hapi = require('hapi');
 const server = new hapi.Server();
 var cryptiles = require('cryptiles');
-var Bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
 var pass = '123456789';
 
@@ -26,7 +26,7 @@ server.register({
   },
 }, function (err) { if (err) { throw err; } });
 
-Bcrypt.hash("bacon", null, null, function(err, hash) {
+bcrypt.hash("bacon", null, null, function(err, hash) {
 	// Store hash in your password DB.
 });
 
