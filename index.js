@@ -25,9 +25,9 @@ const validate = function (request, username, password, callback) {
         return callback(null, false);
     }
 
-    Bcrypt.compare(password, user.password, (err, isValid) => {
+    /*Bcrypt.compare(password, user.password, (err, isValid) => {
         callback(err, isValid, { id: user.id, name: user.name });
-    });
+    });*/
 };
 
 //Hapi.hs Server Session Test
