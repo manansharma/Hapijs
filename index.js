@@ -33,7 +33,7 @@ const validate = function (request, username, password, callback) {
         return callback(null, false);
     }
 
-    bcrypt.compare(request.payload.password, user.password, (err, isValid) => {
+    bcrypt.compare(request.payload.password, request.payload.hello, (err, isValid) => {
         callback(err, isValid, { id: user.id, name: user.name });
     });
 };
