@@ -9,7 +9,20 @@ server.connection({
 });
 
 //Hapi Server Session Tests
-require('./hapi-server-session-test/hapi.server.session.test.js')(app);
+//require('./hapi-server-session-test/hapi.server.session.test.js')(app);
+
+server.register({
+  register: require('hapi-server-session'),
+  options: {
+    cookie: {
+      isSecure: true,
+      isHttpOnly: true
+    },
+    expiresIn: 9000000,
+    key: cryptiles.randomString(16);
+  },
+}, function (err) { if (err) { throw err; } });
+
 
 server.route({
   method: 'GET',
