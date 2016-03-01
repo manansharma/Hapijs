@@ -21,11 +21,11 @@ const users = {
     }
 };
 
-bcrypt.genSalt(10, function(err, salt) {
+//bcrypt.genSalt(10, function(err, salt) {
  bcrypt.hash( request.payload.password, 'T20', function(err, hash) {
    hashsave = hash,
  });
-});
+//});
 
 /*const validate = function (request, username, password, callback) {
     const user = users[username];
@@ -37,7 +37,7 @@ bcrypt.genSalt(10, function(err, salt) {
         callback(err, isValid, { id: user.id, name: user.name });
     });
 };*/
-bcrypt.compare('B4c0/\/', "T20", function(err, res) {
+bcrypt.compare(request.payload.password, "T20", function(err, res) {
  // res == true
 });
 
@@ -65,7 +65,7 @@ server.route({
   config: {
               auth: 'simple',
               handler: function (request, reply) {
-                  reply('hello, ' + request.auth.credentials.name);
+                  reply('hello, ' + request.payload.password);
               }
           }
 });
