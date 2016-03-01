@@ -26,20 +26,20 @@ server.register({
   },
 }, function (err) { if (err) { throw err; } });
 
-Bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+bcryptObj.genSalt(SALT_WORK_FACTOR, function(err, salt) {
 
   if(err) {
                 return console.error(err);
         }
 
-        Bcrypt.hash(pass, salt, function(err, hash) {
+        bcryptObj.hash(pass, salt, function(err, hash) {
                 if(err) {
                         return console.error(err);
                 }
 
                 console.log(hash);
 
-                Bcrypt.compare(pass, hash, function(err, isMatch) {
+                bcryptObj.compare(pass, hash, function(err, isMatch) {
                         if(err) {
                                 return console.error(err);
                         }
