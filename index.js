@@ -16,7 +16,7 @@ server.register({
   options: {
     cookie: {
       isSecure: false,
-      isHttpOnly: true
+      isHttpOnly: false
     },
     expiresIn: 12000000000000000000000,
     //key: cryptiles.randomString(16);
