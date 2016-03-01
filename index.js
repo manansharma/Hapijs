@@ -44,7 +44,7 @@ bcrypt.compare('B4c0/\/', "T20", function(err, res) {
 
 
 //Hapi.hs Server Session Test
-/*server.register({
+server.register({
   register: require('hapi-server-session'),
   options: {
     cookie: {
@@ -54,12 +54,12 @@ bcrypt.compare('B4c0/\/', "T20", function(err, res) {
     expiresIn: 900000,
     //key: cryptiles.randomString(16);
   },
-}, function (err) { if (err) { throw err; } });*/
+}, function (err) { if (err) { throw err; } });
 
 
 
 
-server.route({
+/*server.route({
   method: 'GET',
   path: '/',
   config: {
@@ -68,7 +68,7 @@ server.route({
                   reply('hello, ' + request.auth.credentials.name);
               }
           }
-});
+});*/
 server.start();
 
 /*server.register(Basic, (err) => {
