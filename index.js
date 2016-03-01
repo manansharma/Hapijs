@@ -59,7 +59,7 @@ bcrypt.compare('B4c0/\/', "T20", function(err, res) {
 
 
 
-/*server.route({
+server.route({
   method: 'GET',
   path: '/',
   config: {
@@ -69,9 +69,9 @@ bcrypt.compare('B4c0/\/', "T20", function(err, res) {
               }
           }
 });
-server.start();*/
+server.start();
 
-server.register(Basic, (err) => {
+/*server.register(Basic, (err) => {
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
     server.route({
         method: 'GET',
@@ -87,4 +87,4 @@ server.register(Basic, (err) => {
     server.start(() => {
         console.log('server running at: ' + server.info.uri);
     });
-});
+});*/
