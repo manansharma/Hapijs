@@ -11,11 +11,11 @@ server.connection({
   port: 3000,
 });
 
-bcrypt.genSalt(10, function(err, salt) {
+//bcrypt.genSalt(10, function(err, salt) {
  bcrypt.hash('B4c0/\/', salt, function(err, hash) {
  // Store hash in your password DB.
  });
-});
+//});
 
 // Load hash from your password DB.
 bcrypt.compare('B4c0/\/', hash, function(err, res) {
