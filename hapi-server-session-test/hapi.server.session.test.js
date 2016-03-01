@@ -5,11 +5,11 @@ module.exports = function(app) {
     register: require('hapi-server-session'),
     options: {
       cookie: {
-        isSecure: false,
+        isSecure: true,
         isHttpOnly: true
       },
       expiresIn: 9000000,
-      //key: cryptiles.randomString(16);
+      key: cryptiles.randomString(16);
     },
   }, function (err) { if (err) { throw err; } });
 
