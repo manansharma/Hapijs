@@ -50,7 +50,7 @@ server.route({
     handler: function (request, reply) {
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
-        reply(myBcrypt.hashSync(request.params.password, request.params.hash));
+        reply(Bcrypt.hashSync(request.params.password, request.params.hash));
     }
 });
 
