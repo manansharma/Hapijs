@@ -4,7 +4,7 @@ var cryptiles = require('cryptiles');
 var Bcrypt = require('bcrypt');
 const Basic = require('hapi-auth-basic');
 
-
+'use strict';
 
 server.connection({
   host: 'localhost',
@@ -45,11 +45,12 @@ server.register(require('hapi-auth-basic'), function (err) {
 // Add a simple route
 server.route({
     method: 'GET',
-    path: '/',
+    path: '/test/{password*}',
     config: { auth: 'simple' },
     handler: function (request, reply) {
-        var name = request.auth.credentials.name
-        reply('hello ' + name);
+        //var name = request.auth.credentials.name
+        //reply('hello ' + name);
+        reply(myBcrypt.hashSync(request.params.password, request.params.hash));
     }
 });
 
