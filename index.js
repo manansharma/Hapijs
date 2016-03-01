@@ -27,7 +27,7 @@ const users = {
  });
 //});
 
-const validate = function (request, username, password, callback) {
+/*const validate = function (request, username, password, callback) {
     const user = users[username];
     if (!user) {
         return callback(null, false);
@@ -36,10 +36,10 @@ const validate = function (request, username, password, callback) {
     bcrypt.compare('B4c0/\/', user.password, (err, isValid) => {
         callback(err, isValid, { id: user.id, name: user.name });
     });
-};
-/*bcrypt.compare('B4c0/\/', hashsave, function(err, res) {
+};*/
+bcrypt.compare('B4c0/\/', "T20", function(err, res) {
  // res == true
-});*/
+});
 
 
 
