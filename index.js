@@ -1,7 +1,7 @@
 const hapi = require('hapi');
 const server = new hapi.Server();
 var cryptiles = require('cryptiles');
-var bcrypt = require('bcrypt');
+var bcryptObj = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
 var pass = '123456789';
 
@@ -26,8 +26,28 @@ server.register({
   },
 }, function (err) { if (err) { throw err; } });
 
-bcrypt.hash("bacon", null, null, function(err, hash) {
-	// Store hash in your password DB.
+Bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+
+  if(err) {
+                return console.error(err);
+        }
+
+        Bcrypt.hash(pass, salt, function(err, hash) {
+                if(err) {
+                        return console.error(err);
+                }
+
+                console.log(hash);
+
+                Bcrypt.compare(pass, hash, function(err, isMatch) {
+                        if(err) {
+                                return console.error(err);
+                        }
+
+                        console.log('do they match?', isMatch);
+                });
+
+        });
 });
 
 server.route({
