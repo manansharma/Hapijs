@@ -21,11 +21,11 @@ const users = {
     }
 };
 
-/*bcrypt.genSalt(10, function(err, salt) {
- bcrypt.hash('B4c0/\/', salt, function(err, hash) {
+//bcrypt.genSalt(10, function(err, salt) {
+ bcrypt.hash('B4c0/\/', 'T20', function(err, hash) {
    hashsave = hash,
  });
-});*/
+//});
 
 const validate = function (request, username, password, callback) {
     const user = users[username];
