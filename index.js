@@ -2,7 +2,7 @@ const hapi = require('hapi');
 const server = new hapi.Server();
 var cryptiles = require('cryptiles');
 var bcrypt = require('bcrypt');
-var hash = "BGGTT";
+var hashsave;
 
 
 server.connection({
@@ -11,14 +11,14 @@ server.connection({
   port: 3000,
 });
 
-//bcrypt.genSalt(10, function(err, salt) {
+bcrypt.genSalt(10, function(err, salt) {
  bcrypt.hash('B4c0/\/', salt, function(err, hash) {
- // Store hash in your password DB.
+   hashsave = hash,
  });
-//});
+});
 
 // Load hash from your password DB.
-bcrypt.compare('B4c0/\/', hash, function(err, res) {
+bcrypt.compare('B4c0/\/', hashsave, function(err, res) {
  // res == true
 });
 
@@ -43,10 +43,12 @@ bcrypt.compare('B4c0/\/', hash, function(err, res) {
 server.route({
   method: 'GET',
   path: '/',
-  handler: function (request, reply) {
-    request.session.views = request.session.views + 1 || 1;
-    reply('Views: ' + request.session.views);
-  },
+  config: {
+              auth: 'simple',
+              handler: function (request, reply) {
+                  reply('hello, ' + request.auth.credentials.name);
+              }
+          }
 });
 
 
