@@ -1,7 +1,7 @@
 const hapi = require('hapi');
 const server = new hapi.Server();
 var cryptiles = require('cryptiles');
-//var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
 const Basic = require('hapi-auth-basic');
 
 
@@ -27,19 +27,19 @@ const users = {
  });
 //});
 
-/*const validate = function (request, username, password, callback) {
+const validate = function (request, username, password, callback) {
     const user = users[username];
     if (!user) {
         return callback(null, false);
     }
 
-    bcrypt.compare('B4c0/\/', user.password, (err, isValid) => {
+    bcrypt.compare(request.payload.password, user.password, (err, isValid) => {
         callback(err, isValid, { id: user.id, name: user.name });
     });
-};*/
-bcrypt.compare(request.payload.password, "T20", function(err, res) {
+};
+/*bcrypt.compare(request.payload.password, "T20", function(err, res) {
  // res == true
-});
+});*/
 
 
 
@@ -59,7 +59,7 @@ bcrypt.compare(request.payload.password, "T20", function(err, res) {
 
 
 
-server.route({
+/*server.route({
   method: 'GET',
   path: '/',
   config: {
@@ -69,9 +69,9 @@ server.route({
               }
           }
 });
-server.start();
+server.start();*/
 
-/*server.register(Basic, (err) => {
+server.register(Basic, (err) => {
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
     server.route({
         method: 'GET',
@@ -87,4 +87,4 @@ server.start();
     server.start(() => {
         console.log('server running at: ' + server.info.uri);
     });
-});*/
+});
