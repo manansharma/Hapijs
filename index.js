@@ -1,7 +1,7 @@
 const hapi = require('hapi');
 const server = new hapi.Server();
 var cryptiles = require('cryptiles');
-var bcrypt = require('bcrypt');
+//var bcrypt = require('bcrypt');
 const Basic = require('hapi-auth-basic');
 
 
