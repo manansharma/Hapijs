@@ -2,8 +2,7 @@ const hapi = require('hapi');
 const server = new hapi.Server();
 var cryptiles = require('cryptiles');
 var bcryptObj = require('bcrypt');
-var SALT_WORK_FACTOR = 10;
-var pass = '123456789';
+const Basic = require('hapi-auth-basic');
 
 server.connection({
   host: 'localhost',
@@ -11,10 +10,28 @@ server.connection({
   port: 3000,
 });
 
-//Hapi Server Session Tests
-//require('./hapi-server-session-test/hapi.server.session.test.js')(app);
+const users = {
+    john: {
+        username: 'john',
+        password: 'secret',   // 'secret'
+        name: 'John Doe',
+        id: '2133d32a'
+    }
+};
 
-server.register({
+const validate = function (request, username, password, callback) {
+    const user = users[username];
+    if (!user) {
+        return callback(null, false);
+    }
+
+    Bcrypt.compare(password, user.password, (err, isValid) => {
+        callback(err, isValid, { id: user.id, name: user.name });
+    });
+};
+
+//Hapi.hs Server Session Test
+/*server.register({
   register: require('hapi-server-session'),
   options: {
     cookie: {
@@ -26,29 +43,8 @@ server.register({
   },
 }, function (err) { if (err) { throw err; } });
 
-bcryptObj.genSalt(SALT_WORK_FACTOR, function(err, salt) {
 
-  if(err) {
-                return console.error(err);
-        }
 
-        bcryptObj.hash(pass, salt, function(err, hash) {
-                if(err) {
-                        return console.error(err);
-                }
-
-                console.log(hash);
-
-                bcryptObj.compare(pass, hash, function(err, isMatch) {
-                        if(err) {
-                                return console.error(err);
-                        }
-
-                        console.log('do they match?', isMatch);
-                });
-
-        });
-});
 
 server.route({
   method: 'GET',
@@ -57,19 +53,22 @@ server.route({
     request.session.views = request.session.views + 1 || 1;
     reply('Views: ' + request.session.views);
   },
-});
+});*/
 
-/*Hapi Inert File Inclusion Test
-server.register(Inert, () => {});
+server.register(Basic, (err) => {
+    server.auth.strategy('simple', 'basic', { validateFunc: validate });
+    server.route({
+        method: 'GET',
+        path: '/',
+        config: {
+            auth: 'simple',
+            handler: function (request, reply) {
+                reply('hello, ' + request.auth.credentials.name);
+            }
+        }
+    });
+  });
 
-server.route({
-    method: 'GET',
-    path: '/documents/{user}/{file}',
-    handler: function(request, reply) {
-        var path = Path.join(request.params.user, request.params.file);
-        return reply.file(path);
-    }
-});
-End of Inert File Inclusion Test*/
+
 
 server.start();
