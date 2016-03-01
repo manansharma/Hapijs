@@ -15,7 +15,6 @@ server.register({
   register: require('hapi-server-session'),
   options: {
     cookie: {
-      isSecure: true,
       
     },
     expiresIn: 12000000000000000000000,
