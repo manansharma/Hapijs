@@ -1,6 +1,7 @@
 const hapi = require('hapi');
 const server = new hapi.Server();
 var cryptiles = require('cryptiles');
+var Bcrypt = require('bcrypt');
 
 server.connection({
   host: 'localhost',
@@ -18,11 +19,14 @@ server.register({
       isSecure: true,
       isHttpOnly: true
     },
-    expiresIn: 12000000000000000000000,
+    expiresIn: 9000000,
     //key: cryptiles.randomString(16);
   },
 }, function (err) { if (err) { throw err; } });
 
+bcrypt.hash('B4c0/\/', 'ASD', function(err, hash) {
+        // Store hash in your password DB.
+    });
 
 server.route({
   method: 'GET',
