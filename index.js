@@ -18,8 +18,8 @@ server.register({
       isSecure: true,
       isHttpOnly: true
     },
-    //expiresIn: 1200000,
-    key: cryptiles.randomString(16);
+    expiresIn: 12000000000000000000000,
+    //key: cryptiles.randomString(16);
   },
 }, function (err) { if (err) { throw err; } });
 
