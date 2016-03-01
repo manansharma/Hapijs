@@ -2,6 +2,7 @@ const hapi = require('hapi');
 const server = new hapi.Server();
 var cryptiles = require('cryptiles');
 var bcrypt = require('bcrypt');
+var hash = "BGGTT";
 
 
 server.connection({
