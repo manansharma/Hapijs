@@ -2,6 +2,8 @@ const hapi = require('hapi');
 const server = new hapi.Server();
 var cryptiles = require('cryptiles');
 var Bcrypt = require('bcrypt');
+var SALT_WORK_FACTOR = 10;
+var pass = '123456789';
 
 server.connection({
   host: 'localhost',
@@ -19,14 +21,33 @@ server.register({
       isSecure: true,
       isHttpOnly: true
     },
-    expiresIn: 9000000,
+    expiresIn: 900000,
     //key: cryptiles.randomString(16);
   },
 }, function (err) { if (err) { throw err; } });
 
-bcrypt.hash('B4c0/\/', 'ASD', function(err, hash) {
-        // Store hash in your password DB.
-    });
+Bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+        if(err) {
+                return console.error(err);
+        }
+
+        Bcrypt.hash(pass, salt, function(err, hash) {
+                if(err) {
+                        return console.error(err);
+                }
+
+                console.log(hash);
+
+                Bcrypt.compare(pass, hash, function(err, isMatch) {
+                        if(err) {
+                                return console.error(err);
+                        }
+
+                        console.log('do they match?', isMatch);
+                });
+
+        });
+});
 
 server.route({
   method: 'GET',
