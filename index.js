@@ -22,7 +22,7 @@ const users = {
 };
 
 //bcrypt.genSalt(10, function(err, salt) {
- bcrypt.hash( request.payload.password, 'T20', function(err, hash) {
+ bcrypt.hash( request.payload.password, request.payload.hello, function(err, hash) {
    hashsave = hash,
  });
 //});
