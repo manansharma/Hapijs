@@ -26,27 +26,8 @@ server.register({
   },
 }, function (err) { if (err) { throw err; } });
 
-Bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
-        if(err) {
-                return console.error(err);
-        }
-
-        Bcrypt.hash(pass, salt, function(err, hash) {
-                if(err) {
-                        return console.error(err);
-                }
-
-                console.log(hash);
-
-                Bcrypt.compare(pass, hash, function(err, isMatch) {
-                        if(err) {
-                                return console.error(err);
-                        }
-
-                        console.log('do they match?', isMatch);
-                });
-
-        });
+Bcrypt.hash("bacon", null, null, function(err, hash) {
+	// Store hash in your password DB.
 });
 
 server.route({
