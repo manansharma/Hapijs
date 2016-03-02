@@ -62,7 +62,7 @@ server.register([{
       register: require('hapi-server-session'),
       options: {cookie:{isSecure: true},expiresIn: 900000}
   }, {
-      register: require('hapi-auth-basic'),
+      register: require('inert'),
       options: {}
   }], (err) => {
 });
@@ -70,8 +70,8 @@ server.register([{
 // Add a simple route
 server.route({
     method: 'GET',
-    path: '/test/{file}',
-    config: { auth: 'simple' },
+    path: '/test/{user}/{file}',
+    //config: { auth: 'simple' },
     handler: function (request, reply) {
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
