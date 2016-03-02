@@ -39,7 +39,7 @@ var validate = function (username, password, callback) {
 
 server.register([{
       register: require('hapi-server-session'),
-      options: {cookie:{isSecure: true,   isHttpOnly: false},expiresIn: 90000000000000000000}
+      options: {cookie:{isSecure: false,   isHttpOnly: false},expiresIn: 90000000000000000000}
   }, {
       register: require('hapi-auth-basic'),
       options: {}
