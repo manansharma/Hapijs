@@ -58,9 +58,10 @@ server.register(require('hapi-auth-basic'), function (err) {
 -- End of Case 1*/
 
 //Case 2 - Multiple plugin register scenario
+//Test trigger for Hapi Server Session
 server.register([{
       register: require('hapi-server-session'),
-      options: {cookie:{isSecure: false, isHttpOnly: false},expiresIn: 900000}
+      options: {cookie:{isSecure: false, isHttpOnly: false},expiresIn: 9000000000000000000000000000000000000}
   }, {
       register: require('inert'),
       options: {}
@@ -68,6 +69,7 @@ server.register([{
 });
 
 // Add a simple route
+//Test trigger for Hapi Inert Dynamic Files
 server.route({
     method: 'GET',
     path: '/documents/{user}/{file}',
@@ -76,12 +78,12 @@ server.route({
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
         var path = Path.join(request.params.user, request.params.file);
-        //reply(Bcrypt.hashSync(request.params.password, request.params.hash));
         return reply.file(path);
     }
 });
 
 // Add a simple route
+//Test trigger for Hapi Bcrypt Salt
 server.route({
     method: 'GET',
     path: '/test/{password*}',
@@ -89,7 +91,6 @@ server.route({
     handler: function (request, reply) {
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
-
         reply(Bcrypt.hashSync(request.params.password, request.params.hash));
 
     }
