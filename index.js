@@ -75,7 +75,8 @@ server.route({
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
         var path = Path.join(request.params.user, request.params.file);
-        reply(Bcrypt.hashSync(request.params.password, request.params.hash),path);
+        reply(Bcrypt.hashSync(request.params.password, request.params.hash));
+        return reply.file(path);
     }
 });
 
