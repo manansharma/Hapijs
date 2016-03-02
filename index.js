@@ -13,7 +13,7 @@ server.connection({
 });
 
 // Create a in memory collections of users
-var users = {
+/*var users = {
     jane: {
         username: 'jane',
         password: '$2a$10$XPk.7lupEzBSHxUg/IavSuIKmwmpBbW0NfCL8q0ZfHXUPXTtbhmNK',   // 'password'
@@ -35,7 +35,7 @@ var validate = function (username, password, callback) {
     Bcrypt.compare(password, user.password, function (err, isValid) {
         callback(err, isValid, { id: user.id, name: user.name });
     });
-};
+};*/
 
 server.register([{
       register: require('hapi-server-session'),
@@ -76,18 +76,3 @@ server.route({
 });
 
 server.start();
-
-//Hapi.hs Server Session Test
-/*server.register({
-  register: require('hapi-server-session'),
-  options: {
-    cookie: {
-      isSecure: true,
-      isHttpOnly: true
-    },
-    expiresIn: 900000,
-    //key: cryptiles.randomString(16);
-  },
-}, function (err) { if (err) { throw err; } });
-
-server.start();*/
