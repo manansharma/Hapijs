@@ -37,16 +37,8 @@ var validate = function (username, password, callback) {
     });
 };*/
 
-server.register([{
-      register: require('hapi-server-session'),
-      options: {cookie:{isSecure: true,   isHttpOnly: true},expiresIn: 90000000000000000000}
-  }, {
-      register: require('hapi-auth-basic'),
-      options: {}
-  }], (err) => {
-});
-
-/*server.register({
+/*Case 1 - Simple single plugin register scenario
+server.register({
   register: require('hapi-server-session'),
   options: {
     cookie: {
@@ -61,7 +53,18 @@ server.register([{
 // Add the basic-auth plug-in
 server.register(require('hapi-auth-basic'), function (err) {
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
-});*/
+});
+-- End of Case 1*/
+
+//Case 2 - Multiple plugin register scenario
+server.register([{
+      register: require('hapi-server-session'),
+      options: {cookie:{isSecure: true},expiresIn: 90000000000000000000}
+  }, {
+      register: require('hapi-auth-basic'),
+      options: {}
+  }], (err) => {
+});
 
 // Add a simple route
 server.route({
