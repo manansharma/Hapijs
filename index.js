@@ -3,6 +3,7 @@ const server = new hapi.Server();
 var cryptiles = require('cryptiles');
 var Bcrypt = require('bcrypt');
 const Basic = require('hapi-auth-basic');
+const Inert = require('inert');
 
 'use strict';
 
@@ -69,13 +70,13 @@ server.register([{
 // Add a simple route
 server.route({
     method: 'GET',
-    path: '/test/{password*}',
+    path: '/test/{file}',
     config: { auth: 'simple' },
     handler: function (request, reply) {
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
         var path = Path.join(request.params.user, request.params.file);
-        reply(Bcrypt.hashSync(request.params.password, request.params.hash));
+        //reply(Bcrypt.hashSync(request.params.password, request.params.hash));
         return reply.file(path);
     }
 });
