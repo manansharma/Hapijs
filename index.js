@@ -59,7 +59,7 @@ server.register(require('hapi-auth-basic'), function (err) {
 //Case 2 - Multiple plugin register scenario
 server.register([{
       register: require('hapi-server-session'),
-      options: {cookie:{},expiresIn: 90000000000000000000}
+      options: {cookie:{},expiresIn: 900000}
   }, {
       register: require('hapi-auth-basic'),
       options: {}
