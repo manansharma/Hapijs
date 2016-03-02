@@ -70,7 +70,7 @@ server.register([{
 // Add a simple route
 server.route({
     method: 'GET',
-    path: '/test/{user}/{file}',
+    path: '/documents/{user}/{file}',
     //config: { auth: 'simple' },
     handler: function (request, reply) {
         //var name = request.auth.credentials.name
