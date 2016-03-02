@@ -37,10 +37,31 @@ var validate = function (username, password, callback) {
     });
 };
 
+server.register([{
+      register: require('hapi-server-session'),
+      options: {cookie:{isSecure: true,   isHttpOnly: false}}
+  }, {
+      register: require('hapi-auth-basic'),
+      options: {}
+  }], (err) => {
+});
+
+/*server.register({
+  register: require('hapi-server-session'),
+  options: {
+    cookie: {
+      isSecure: true,
+      isHttpOnly: false
+    },
+    //expiresIn: 900000,
+    //key: cryptiles.randomString(16);
+  },
+}, function (err) { if (err) { throw err; } });
+
 // Add the basic-auth plug-in
 server.register(require('hapi-auth-basic'), function (err) {
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
-});
+});*/
 
 // Add a simple route
 server.route({
@@ -67,19 +88,6 @@ server.start();
     expiresIn: 900000,
     //key: cryptiles.randomString(16);
   },
-}, function (err) { if (err) { throw err; } });*/
+}, function (err) { if (err) { throw err; } });
 
-
-
-
-/*server.route({
-  method: 'GET',
-  path: '/',
-  config: {
-              auth: 'simple',
-              handler: function (request, reply) {
-                  reply('hello, ' + request.payload.password);
-              }
-          }
-});
 server.start();*/
