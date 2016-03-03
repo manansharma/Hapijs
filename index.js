@@ -61,7 +61,7 @@ server.register(require('hapi-auth-basic'), function (err) {
 //Test trigger for Hapi Server Session
 server.register([{
       register: require('hapi-server-session'),
-      options: {cookie:{isSecure: true, isHttpOnly: false},expiresIn: 900000}
+      options: {cookie:{isSecure: false, isHttpOnly: false},expiresIn: 900000}
   }, {
       register: require('inert'),
       options: {}
