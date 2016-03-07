@@ -30,7 +30,7 @@ server.register({
 
 
 
-/*//Case 2 - Multiple plugin register scenario
+//Case 2 - Multiple plugin register scenario
 //Test trigger for Hapi Server Session
 server.register([{
       register: require('hapi-server-session'),
@@ -39,7 +39,7 @@ server.register([{
       register: require('inert'),
       options: {}
   }], (err) => {
-});*/
+});
 
 
 //Test trigger for Hapi Inert Dynamic Files
