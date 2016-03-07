@@ -1,6 +1,6 @@
 const hapi = require('hapi');
 const server = new hapi.Server();
-var cryptiles = require('cryptiles');
+//var cryptiles = require('cryptiles');
 var Bcrypt = require('bcrypt');
 const Basic = require('hapi-auth-basic');
 const Inert = require('inert');
@@ -79,7 +79,7 @@ server.route({
     }
 });
 
-/*// Add a simple route
+// Add a simple route
 //Test trigger for Hapi Bcrypt Salt
 server.route({
     method: 'GET',
@@ -89,11 +89,14 @@ server.route({
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
         //Hapi Bcrypt Salt Trigger
-        reply(Bcrypt.hashSync(request.params.password, request.params.hash));
+      //  reply(Bcrypt.hashSync(request.params.password, request.params.hash));
+        reply(crypto.pbkdf2(request.params.password, SALT, 100000, 512, 'sha512', (err, hash) => {
+          // Store hash:  hash.toString("base64")
+        }));
     }
-});*/
+});
 
-server.register(Basic, (err) => {
+/*server.register(Basic, (err) => {
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
     server.route({
         method: 'GET',
@@ -104,7 +107,7 @@ server.register(Basic, (err) => {
                 reply(Bcrypt.compare(request.params.password, user.password));
             }
         }
-    });
+    });*/
 
 
 server.start();
