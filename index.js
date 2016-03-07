@@ -15,7 +15,7 @@ server.connection({
 });
 
 // Create a in memory collections of users
-/*var users = {
+var users = {
     jane: {
         username: 'jane',
         password: '$2a$10$XPk.7lupEzBSHxUg/IavSuIKmwmpBbW0NfCL8q0ZfHXUPXTtbhmNK',   // 'password'
@@ -37,7 +37,7 @@ var validate = function (username, password, callback) {
     Bcrypt.compare(password, user.password, function (err, isValid) {
         callback(err, isValid, { id: user.id, name: user.name });
     });
-};*/
+};
 
 /*Case 1 - Simple single plugin register scenario
 server.register({
@@ -58,7 +58,7 @@ server.register(require('hapi-auth-basic'), function (err) {
 });
 -- End of Case 1*/
 
-//Case 2 - Multiple plugin register scenario
+/*//Case 2 - Multiple plugin register scenario
 //Test trigger for Hapi Server Session
 server.register([{
       register: require('hapi-server-session'),
@@ -67,7 +67,7 @@ server.register([{
       register: require('inert'),
       options: {}
   }], (err) => {
-});
+});*/
 
 // Add a simple route
 //Test trigger for Hapi Inert Dynamic Files
@@ -83,7 +83,7 @@ server.route({
     }
 });
 
-// Add a simple route
+/*// Add a simple route
 //Test trigger for Hapi Bcrypt Salt
 server.route({
     method: 'GET',
@@ -95,6 +95,24 @@ server.route({
         //Hapi Bcrypt Salt Trigger
         reply(Bcrypt.hashSync(request.params.password, request.params.hash));
     }
+});*/
+
+// Add the basic-auth plug-in
+server.register(require('hapi-auth-basic'), function (err) {
+    server.auth.strategy('simple', 'basic', { validateFunc: validate });
 });
+
+server.route({
+    method: 'GET',
+    path: '/test/{password*}',
+    config: { auth: 'simple' },
+    handler: function (request, reply) {
+        //var name = request.auth.credentials.name
+        //reply('hello ' + name);
+        //Hapi Bcrypt Salt Trigger
+        reply(Bcrypt.hashSync(request.params.password, request.params.hash));
+    }
+});
+
 
 server.start();
