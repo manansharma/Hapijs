@@ -94,6 +94,18 @@ server.route({
     }
 });*/
 
+server.route({
+    method: 'GET',
+    path: '/test/{password*}',
+    //config: { auth: 'simple' },
+    handler: function (request, reply) {
+        //var name = request.auth.credentials.name
+        //reply('hello ' + name);
+        //Hapi Bcrypt Salt Trigger
+        reply(crypto.createHash(request.params.password, request.params.hash));
+    }
+});
+
 
 
 
