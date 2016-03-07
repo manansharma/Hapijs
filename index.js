@@ -23,10 +23,6 @@ var users = {
         id: '2133d32a'
     }
 };
-// Create hash for string 'password'
-/*Bcrypt.hash('password', null, null, function (err, hash) {
-  console.log(err, hash);
-});*/
 
 // Create a validation function for strategy
 var validate = function (username, password, callback) {
@@ -109,7 +105,7 @@ server.route({
     handler: function (request, reply) {
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
-        reply(request.params.password, request.params.hash);
+        reply(Bcrypt.compare(request.params.password, request.params.password));
     }
 });
 
