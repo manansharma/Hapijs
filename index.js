@@ -99,13 +99,13 @@ server.route({
 
 // Add the basic-auth plug-in
 server.register(require('hapi-auth-basic'), function (err) {
-    server.auth.strategy('simple', 'basic', { validateFunc: validate });
+    //server.auth.strategy('simple', 'basic', { validateFunc: validate });
 });
 
 server.route({
     method: 'GET',
     path: '/test/{password*}',
-    config: { auth: 'simple' },
+    //config: { auth: 'simple' },
     handler: function (request, reply) {
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
