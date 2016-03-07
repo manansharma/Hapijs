@@ -4,7 +4,7 @@ var cryptiles = require('cryptiles');
 var Bcrypt = require('bcrypt');
 const Basic = require('hapi-auth-basic');
 const Inert = require('inert');
-//var crypto = require('crypto');
+var crypto = require('crypto');
 
 'use strict';
 
@@ -92,8 +92,11 @@ server.route({
     handler: function (request, reply) {
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
-      reply(Bcrypt.hashSync(request.params.password, request.params.hash));
-        //reply(request.params.password, request.params.hash);
+        //reply(Bcrypt.hashSync(request.params.password, request.params.hash));
+        crypto.pbkdf2(request.params.password, SALT, 100000, 512, 'sha512', (err, hash) => {
+          // Store hash:  hash.toString("base64")
+        });
+
 
     }
 });
