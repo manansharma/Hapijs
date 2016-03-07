@@ -79,7 +79,7 @@ server.route({
     }
 });
 
-// Add a simple route
+/*// Add a simple route
 //Test trigger for Hapi Bcrypt Salt
 server.route({
     method: 'GET',
@@ -91,23 +91,22 @@ server.route({
         //Hapi Bcrypt Salt Trigger
         reply(Bcrypt.hashSync(request.params.password, request.params.hash));
     }
-});
-
-/* Add the basic-auth plug-in
-server.register(require('hapi-auth-basic'), function (err) {
-    server.auth.strategy('simple', 'basic', { validateFunc: validate });
-});
-
-server.route({
-    method: 'GET',
-    path: '/test/{password*}',
-    //config: { auth: 'simple' },
-    handler: function (request, reply) {
-        //var name = request.auth.credentials.name
-        //reply('hello ' + name);
-        reply(Bcrypt.compare(request.params.password, request.params.password));
-    }
 });*/
+
+server.register(Basic, (err) => {
+    server.auth.strategy('simple', 'basic', { validateFunc: validate });
+    server.route({
+        method: 'GET',
+        path: '/',
+        config: {
+            auth: 'simple',
+            handler: function (request, reply) {
+                reply(Bcrypt.compare(request.params.password, user.password, (err, isValid) => {
+                    callback(err, isValid, { id: user.id, name: user.name });
+                }));
+            }
+        }
+    });
 
 
 server.start();
