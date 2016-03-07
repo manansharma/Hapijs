@@ -50,9 +50,9 @@ server.register({
 }, function (err) { if (err) { throw err; } });*/
 
 // Add the basic-auth plug-in
-server.register(require('hapi-auth-basic'), function (err) {
+/*server.register(require('hapi-auth-basic'), function (err) {
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
-});
+});*/
 
 
 /*//Case 2 - Multiple plugin register scenario
