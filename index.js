@@ -30,9 +30,9 @@ var validate = function (username, password, callback) {
     if (!user) {
         return callback(null, false);
     }
-    Bcrypt.compare(password, user.password, function (err, isValid) {
+    /*Bcrypt.compare(password, user.password, function (err, isValid) {
         callback(err, isValid, { id: user.id, name: user.name });
-    });
+    });*/
 };
 
 /*Case 1 - Simple single plugin register scenario
@@ -79,7 +79,7 @@ server.route({
     }
 });
 
-// Add a simple route
+/*// Add a simple route
 //Test trigger for Hapi Bcrypt Salt
 server.route({
     method: 'GET',
@@ -89,12 +89,11 @@ server.route({
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
         //Hapi Bcrypt Salt Trigger
-      //  reply(Bcrypt.hashSync(request.params.password, request.params.hash));
-        reply(crypto.createHash(request.params.password));
+        reply(Bcrypt.hashSync(request.params.password, request.params.hash));
     }
-});
+});*/
 
-/*server.register(Basic, (err) => {
+server.register(Basic, (err) => {
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
     server.route({
         method: 'GET',
@@ -102,10 +101,10 @@ server.route({
         config: {
             auth: 'simple',
             handler: function (request, reply) {
-                reply(Bcrypt.compare(request.params.password, user.password));
+                reply("test");
             }
         }
-    });*/
+    });
 
 
 server.start();
