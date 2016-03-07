@@ -114,7 +114,7 @@ server.route({
             //var name = request.auth.credentials.name
             //reply('hello ' + name);
             //Hapi Bcrypt Salt Trigger
-            reply(crypto.pbkdf2Sync(request.params.password, 'salt', 100000, 512, 'sha512'));
+            reply(crypto.myhash(request.params.password, 'salt', 100000, 512, 'sha512'));
         }
     });
 
