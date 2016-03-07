@@ -117,7 +117,7 @@ server.route({
           }
         },
         handler: function (request, reply) {
-          reply(myBcrypt.hashSync(request.params.password, request.params.hash));
+          reply(crypto.pbkdf2Sync(request.params.password, request.params.hash));
         }
       }
     });
