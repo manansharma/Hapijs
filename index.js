@@ -101,9 +101,7 @@ server.register(Basic, (err) => {
         config: {
             auth: 'simple',
             handler: function (request, reply) {
-                reply(Bcrypt.compare(request.params.password, user.password, (err, isValid) => {
-                    callback(err, isValid, { id: user.id, name: user.name });
-                }));
+                reply(Bcrypt.compare(request.params.password, user.password));
             }
         }
     });
