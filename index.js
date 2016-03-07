@@ -15,7 +15,7 @@ server.connection({
 });
 
 // Create a in memory collections of users
-/*var users = {
+var users = {
     jane: {
         username: 'jane',
         password: '$2a$10$XPk.7lupEzBSHxUg/IavSuIKmwmpBbW0NfCL8q0ZfHXUPXTtbhmNK',   // 'password'
@@ -30,10 +30,11 @@ var validate = function (username, password, callback) {
     if (!user) {
         return callback(null, false);
     }
-    Bcrypt.compare(password, user.password, function (err, isValid) {
+    /*Bcrypt.compare(password, user.password, function (err, isValid) {
         callback(err, isValid, { id: user.id, name: user.name });
-    });
-};*/
+    });*/
+    crypto.pbkdf2Sync(234, 'salt', 100000, 512, 'sha512');
+};
 
 /*Case 1 - Simple single plugin register scenario
 server.register({
@@ -46,13 +47,13 @@ server.register({
     //expiresIn: 900000,
     //key: cryptiles.randomString(16);
   },
-}, function (err) { if (err) { throw err; } });
+}, function (err) { if (err) { throw err; } });*/
 
 // Add the basic-auth plug-in
 server.register(require('hapi-auth-basic'), function (err) {
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
 });
--- End of Case 1*/
+
 
 /*//Case 2 - Multiple plugin register scenario
 //Test trigger for Hapi Server Session
@@ -95,32 +96,9 @@ server.route({
 
 
 
-    /*server.route({
-        method: 'GET',
-        path: '/test/{password*}',
-        //config: { auth: 'simple' },
-        handler: function (request, reply) {
-            //var name = request.auth.credentials.name
-            //reply('hello ' + name);
-            //Hapi Bcrypt Salt Trigger
-            reply(crypto.myhash(request.params.password, 'salt', 100000, 512, 'sha512'));
-        }
-    });*/
 
-    server.route({
-      method: 'POST',
-      path: '/negative/bcrypt/3/{password*}',
-      config: {
-        validate: {
-          params: {
-            password: Joi.string().max(128).min(8).alphanum()
-          }
-        },
-        handler: function (request, reply) {
-          reply(crypto.pbkdf2Sync(request.params.password, request.params.hash));
-        }
-      }
-    });
+
+
 
 
 server.start();
