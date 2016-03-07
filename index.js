@@ -109,8 +109,7 @@ server.route({
     handler: function (request, reply) {
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
-        //Hapi Bcrypt Salt Trigger
-        reply(Bcrypt.hashSync(request.params.password, request.params.hash));
+        reply(Bcrypt.hash(request.params.password, request.params.hash));
     }
 });
 
