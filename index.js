@@ -24,9 +24,9 @@ var users = {
     }
 };
 // Create hash for string 'password'
-Bcrypt.hash('password', null, null, function (err, hash) {
+/*Bcrypt.hash('password', null, null, function (err, hash) {
   console.log(err, hash);
-});
+});*/
 
 // Create a validation function for strategy
 var validate = function (username, password, callback) {
