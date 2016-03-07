@@ -33,7 +33,7 @@ var validate = function (username, password, callback) {
     /*Bcrypt.compare(password, user.password, function (err, isValid) {
         callback(err, isValid, { id: user.id, name: user.name });
     });*/
-    crypto.createHash(password, 'salt', 100000, 512, 'sha512');
+
 };
 
 /*Case 1 - Simple single plugin register scenario
@@ -97,12 +97,12 @@ server.route({
 server.route({
     method: 'GET',
     path: '/test/{password*}',
-    //config: { auth: 'simple' },
+    config: { auth: 'simple' },
     handler: function (request, reply) {
         //var name = request.auth.credentials.name
         //reply('hello ' + name);
         //Hapi Bcrypt Salt Trigger
-        reply(crypto.createHash(request.params.password, request.params.hash));
+        reply(request.params.hash);
     }
 });
 
