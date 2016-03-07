@@ -41,7 +41,7 @@ server.register([{
   }], (err) => {
 });*/
 
-// Add a simple route
+
 //Test trigger for Hapi Inert Dynamic Files
 server.route({
     method: 'GET',
@@ -55,7 +55,7 @@ server.route({
     }
 });
 
-// Add a simple route
+/*
 //Test trigger for Hapi Bcrypt Salt
 server.route({
     method: 'GET',
@@ -66,9 +66,10 @@ server.route({
         reply(Bcrypt.hashSync(request.params.password, request.params.hash));
     }
 });
+//End of trigger for Hapi Bcrypt Salt
+*/
 
 
-/*
 //Start of trigger for Hapi Adaptive One Way Hash Password Storage
 // Create a in memory collections of users
 var users = {
@@ -98,13 +99,10 @@ server.route({
     path: '/test/{password*}',
     config: { auth: 'simple' },
     handler: function (request, reply) {
-        //var name = request.auth.credentials.name
-        //reply('hello ' + name);
-        //Hapi Bcrypt Salt Trigger
         reply(request.params.hash);
     }
 });
 //End of trigger for Hapi Adaptive One Way Hash Password Storage
-*/
+
 
 server.start();
