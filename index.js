@@ -4,6 +4,7 @@ var cryptiles = require('cryptiles');
 var Bcrypt = require('bcrypt');
 const Basic = require('hapi-auth-basic');
 const Inert = require('inert');
+var crypto = require('crypto');
 
 'use strict';
 
