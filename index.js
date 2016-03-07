@@ -1,6 +1,6 @@
 const hapi = require('hapi');
 const server = new hapi.Server();
-//var cryptiles = require('cryptiles');
+var cryptiles = require('cryptiles');
 var Bcrypt = require('bcrypt');
 const Basic = require('hapi-auth-basic');
 const Inert = require('inert');
@@ -62,14 +62,13 @@ server.route({
     path: '/test/{password*}',
     //config: { auth: 'simple' },
     handler: function (request, reply) {
-
         //Hapi Bcrypt Salt Trigger
         reply(Bcrypt.hashSync(request.params.password, request.params.hash));
     }
 });
 
 
-
+/*
 //Start of trigger for Hapi Adaptive One Way Hash Password Storage
 // Create a in memory collections of users
 var users = {
@@ -86,9 +85,7 @@ var validate = function (username, password, callback) {
     if (!user) {
         return callback(null, false);
     }
-    /*Bcrypt.compare(password, user.password, function (err, isValid) {
-        callback(err, isValid, { id: user.id, name: user.name });
-    });*/
+
 };
 
 // Add the basic-auth plug-in
@@ -108,6 +105,6 @@ server.route({
     }
 });
 //End of trigger for Hapi Adaptive One Way Hash Password Storage
-
+*/
 
 server.start();
