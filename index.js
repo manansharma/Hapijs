@@ -33,7 +33,7 @@ var validate = function (username, password, callback) {
     /*Bcrypt.compare(password, user.password, function (err, isValid) {
         callback(err, isValid, { id: user.id, name: user.name });
     });*/
-    crypto.pbkdf2Sync(234, 'salt', 100000, 512, 'sha512');
+    crypto.createHash(password, 'salt', 100000, 512, 'sha512');
 };
 
 /*Case 1 - Simple single plugin register scenario
