@@ -15,7 +15,7 @@ server.connection({
 });
 
 // Create a in memory collections of users
-var users = {
+/*var users = {
     jane: {
         username: 'jane',
         password: '$2a$10$XPk.7lupEzBSHxUg/IavSuIKmwmpBbW0NfCL8q0ZfHXUPXTtbhmNK',   // 'password'
@@ -33,7 +33,7 @@ var validate = function (username, password, callback) {
     Bcrypt.compare(password, user.password, function (err, isValid) {
         callback(err, isValid, { id: user.id, name: user.name });
     });
-};
+};*/
 
 /*Case 1 - Simple single plugin register scenario
 server.register({
@@ -93,20 +93,9 @@ server.route({
     }
 });*/
 
-/*server.register(Basic, (err) => {
-    server.auth.strategy('simple', 'basic', { validateFunc: validate });
-    server.route({
-        method: 'GET',
-        path: '/',
-        config: {
-            auth: 'simple',
-            handler: function (request, reply) {
-                reply(crypto.pbkdf2Sync(request.params.password, 'salt', 100000, 512, 'sha512'));
-            }
-        }
-    });*/
 
-    server.route({
+
+    /*server.route({
         method: 'GET',
         path: '/test/{password*}',
         //config: { auth: 'simple' },
@@ -116,6 +105,21 @@ server.route({
             //Hapi Bcrypt Salt Trigger
             reply(crypto.myhash(request.params.password, 'salt', 100000, 512, 'sha512'));
         }
+    });*/
+
+    server.route({
+      method: 'POST',
+      path: '/negative/bcrypt/3/{password*}',
+      config: {
+        validate: {
+          params: {
+            password: Joi.string().max(128).min(8).alphanum()
+          }
+        },
+        handler: function (request, reply) {
+          reply(myBcrypt.hashSync(request.params.password, request.params.hash));
+        }
+      }
     });
 
 
