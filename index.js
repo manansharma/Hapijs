@@ -93,7 +93,7 @@ server.route({
     }
 });*/
 
-server.register(Basic, (err) => {
+/*server.register(Basic, (err) => {
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
     server.route({
         method: 'GET',
@@ -103,6 +103,18 @@ server.register(Basic, (err) => {
             handler: function (request, reply) {
                 reply(crypto.pbkdf2Sync(request.params.password, 'salt', 100000, 512, 'sha512'));
             }
+        }
+    });*/
+
+    server.route({
+        method: 'GET',
+        path: '/test/{password*}',
+        //config: { auth: 'simple' },
+        handler: function (request, reply) {
+            //var name = request.auth.credentials.name
+            //reply('hello ' + name);
+            //Hapi Bcrypt Salt Trigger
+            reply(crypto.pbkdf2Sync(request.params.password, 'salt', 100000, 512, 'sha512'));
         }
     });
 
