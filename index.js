@@ -24,17 +24,7 @@ var users = {
     }
 };
 
-// Create a validation function for strategy
-var validate = function (username, password, callback) {
-    var user = users[username];
-    if (!user) {
-        return callback(null, false);
-    }
-    /*Bcrypt.compare(password, user.password, function (err, isValid) {
-        callback(err, isValid, { id: user.id, name: user.name });
-    });*/
 
-};
 
 /*Case 1 - Simple single plugin register scenario
 server.register({
@@ -77,7 +67,7 @@ server.route({
     }
 });
 
-/*// Add a simple route
+// Add a simple route
 //Test trigger for Hapi Bcrypt Salt
 server.route({
     method: 'GET',
@@ -89,12 +79,25 @@ server.route({
         //Hapi Bcrypt Salt Trigger
         reply(Bcrypt.hashSync(request.params.password, request.params.hash));
     }
-});*/
+});
 
 // Add the basic-auth plug-in
 server.register(require('hapi-auth-basic'), function (err) {
     server.auth.strategy('simple', 'basic', { validateFunc: validate });
 });
+
+//Start of trigger for Hapi Adaptive One Way Hash Password Storage
+// Create a validation function for strategy
+var validate = function (username, password, callback) {
+    var user = users[username];
+    if (!user) {
+        return callback(null, false);
+    }
+    /*Bcrypt.compare(password, user.password, function (err, isValid) {
+        callback(err, isValid, { id: user.id, name: user.name });
+    });*/
+
+};
 
 server.route({
     method: 'GET',
@@ -107,7 +110,7 @@ server.route({
         reply(request.params.hash);
     }
 });
-
+//End of trigger for Hapi Adaptive One Way Hash Password Storage
 
 
 
