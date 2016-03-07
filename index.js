@@ -55,8 +55,9 @@ server.route({
     }
 });
 
-/*
-//Test trigger for Hapi Bcrypt Salt
+//*********************************************************************************************************
+//**********************Test trigger for Hapi Bcrypt Salt*************************************************
+//*******************************************************************************************************
 server.route({
     method: 'GET',
     path: '/test/{password*}',
@@ -66,11 +67,19 @@ server.route({
         reply(Bcrypt.hashSync(request.params.password, request.params.hash));
     }
 });
-//End of trigger for Hapi Bcrypt Salt
-*/
+//******************************************************************************************************
+//**************************End of trigger for Hapi Bcrypt Salt****************************************
+//*****************************************************************************************************
 
 
-//Start of trigger for Hapi Adaptive One Way Hash Password Storage
+
+
+
+
+
+//*******************************************************************************************************
+//********************  Start of trigger for Hapi Adaptive One Way Hash Password Storage *****************
+//*******************************************************************************************************
 // Create a in memory collections of users
 var users = {
     jane: {
@@ -102,7 +111,9 @@ server.route({
         reply(request.params.hash);
     }
 });
-//End of trigger for Hapi Adaptive One Way Hash Password Storage
+//********************************************************************************************
+//***************End of trigger for Hapi Adaptive One Way Hash Password Storage***************
+//********************************************************************************************
 
 
 server.start();
