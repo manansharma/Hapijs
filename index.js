@@ -49,10 +49,7 @@ server.register({
   },
 }, function (err) { if (err) { throw err; } });*/
 
-// Add the basic-auth plug-in
-/*server.register(require('hapi-auth-basic'), function (err) {
-    server.auth.strategy('simple', 'basic', { validateFunc: validate });
-});*/
+
 
 
 /*//Case 2 - Multiple plugin register scenario
@@ -93,6 +90,11 @@ server.route({
         reply(Bcrypt.hashSync(request.params.password, request.params.hash));
     }
 });*/
+
+// Add the basic-auth plug-in
+server.register(require('hapi-auth-basic'), function (err) {
+    server.auth.strategy('simple', 'basic', { validateFunc: validate });
+});
 
 server.route({
     method: 'GET',
