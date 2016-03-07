@@ -30,9 +30,9 @@ var validate = function (username, password, callback) {
     if (!user) {
         return callback(null, false);
     }
-    /*Bcrypt.compare(password, user.password, function (err, isValid) {
+    Bcrypt.compare(password, user.password, function (err, isValid) {
         callback(err, isValid, { id: user.id, name: user.name });
-    });*/
+    });
 };
 
 /*Case 1 - Simple single plugin register scenario
@@ -101,10 +101,7 @@ server.register(Basic, (err) => {
         config: {
             auth: 'simple',
             handler: function (request, reply) {
-              Bcrypt.compare(request.params.password, password, function (err, isValid) {
-                  //callback(err, isValid, { id: user.id, name: user.name });
-              });
-                reply("test");
+                reply(crypto.pbkdf2Sync(request.params.password, 'salt', 100000, 512, 'sha512'));
             }
         }
     });
