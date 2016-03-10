@@ -50,10 +50,10 @@ server.route({
     path: '/{path*}',
     //config: { auth: 'simple' },
     handler: function (request, reply) {
-      directory: {
+      /*directory: {
           path: './',
           listing: true
-      }
+      }*/
         var path = Path.join(request.params.user, request.params.file);
         return reply.file(path);
     }
