@@ -48,8 +48,10 @@ server.route({
     path: '/documents/{user}/{file}',
     //config: { auth: 'simple' },
     handler: function (request, reply) {
-        //var name = request.auth.credentials.name
-        //reply('hello ' + name);
+      directory: {
+          path: './',
+          listing: false
+      }
         var path = Path.join(request.params.user, request.params.file);
         return reply.file(path);
     }
