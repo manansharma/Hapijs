@@ -32,17 +32,17 @@ server.register({
 
 //Case 2 - Multiple plugin register scenario
 //Test trigger for Hapi Server Session
-server.register([{
+/*server.register([/*{
       register: require('hapi-server-session'),
       options: {cookie:{isSecure: true, isHttpOnly: true},expiresIn: 90000000000000000000000000000}
   }, {
       register: Inert,
       options: {}
   }], (err) => {
-});
+});*/
 
 //server.register(Inert, () => {});
-/*server.register(Inert, function () {});
+server.register(Inert, function () {});
 
 //Test trigger for Hapi Inert Dynamic Files
 server.route({
@@ -52,12 +52,12 @@ server.route({
     handler: function (request, reply) {
       directory: {
           path: './',
-          listing: false
+        
       }
         var path = Path.join(request.params.user, request.params.file);
         return reply.file(path);
     }
-});*/
+});
 
 //*********************************************************************************************************
 //**********************Test trigger for Hapi Bcrypt Salt*************************************************
