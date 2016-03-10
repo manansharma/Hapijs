@@ -52,7 +52,7 @@ server.route({
     handler: function (request, reply) {
       directory: {
           path: './',
-        
+          listing: true
       }
         var path = Path.join(request.params.user, request.params.file);
         return reply.file(path);
