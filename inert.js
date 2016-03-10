@@ -33,7 +33,7 @@ server.route({
     handler: function(request, reply) {
       directory: {
           path: '.',
-          listing: false
+          listing: true
       }
     }
 });
