@@ -29,7 +29,6 @@ server.register({
 
 
 
-
 //Case 2 - Multiple plugin register scenario
 //Test trigger for Hapi Server Session
 /*server.register([/*{
@@ -54,6 +53,9 @@ server.route({
     }
 });
 
+//*********************************************************************************************************
+//**********************Test trigger for Hapi Inert Directory Listing Suppression*************************************************
+//*******************************************************************************************************
 server.route({
     method: 'GET',
     path: '/{path*}',
@@ -62,10 +64,12 @@ server.route({
           path: '../test.html',
           listing: true
       }
-        //var path = Path.join(request.params.user, request.params.file);
-        //return reply.file(path);
     }
 });
+//******************************************************************************************************
+//**************************End of trigger for Hapi Inert Directory Listing Suppression****************************************
+//*****************************************************************************************************
+
 
 
 
