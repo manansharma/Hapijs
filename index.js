@@ -35,7 +35,7 @@ server.register({
 /*server.register([/*{
       register: require('hapi-server-session'),
       options: {cookie:{isSecure: true, isHttpOnly: true},expiresIn: 90000000000000000000000000000}
-  },*/ {
+  }, {
       register: Inert,
       options: {}
   }], (err) => {
@@ -51,9 +51,10 @@ server.route({
     handler: function (request, reply) {
       directory: {
           path: '.',
-          listing: false
+          listing: true
       }
-      
+        //var path = Path.join(request.params.user, request.params.file);
+        //return reply.file(path);
     }
 });
 
