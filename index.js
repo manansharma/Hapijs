@@ -32,15 +32,16 @@ server.register({
 
 //Case 2 - Multiple plugin register scenario
 //Test trigger for Hapi Server Session
-server.register([/*{
+/*server.register([/*{
       register: require('hapi-server-session'),
       options: {cookie:{isSecure: true, isHttpOnly: true},expiresIn: 90000000000000000000000000000}
   },*/ {
       register: Inert,
       options: {}
   }], (err) => {
-});
+});*/
 
+server.register(Inert, () => {});
 
 //Test trigger for Hapi Inert Dynamic Files
 server.route({
@@ -49,11 +50,11 @@ server.route({
     //config: { auth: 'simple' },
     handler: function (request, reply) {
       directory: {
-          path: './',
+          path: '.',
           listing: false
       }
-        var path = Path.join(request.params.user, request.params.file);
-        return reply.file(path);
+        //var path = Path.join(request.params.user, request.params.file);
+        //return reply.file(path);
     }
 });
 
