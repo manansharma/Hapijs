@@ -45,7 +45,7 @@ server.register({
 server.register(Inert, function () {});
 
 //Test trigger for Hapi Inert Dynamic Files
-server.route({
+/*server.route({
     method: 'GET',
     path: '/{path*}',
     //config: { auth: 'simple' },
@@ -57,7 +57,36 @@ server.route({
         //var path = Path.join(request.params.user, request.params.file);
         //return reply.file(path);
     }
+});*/
+
+server.route({
+    method: 'GET',
+    path: '/{path*}',
+    //config: { auth: 'simple' },
+    handler:  {
+      directory: {
+          path: '../test.html',
+          listing: true
+      }
+        //var path = Path.join(request.params.user, request.params.file);
+        //return reply.file(path);
+    }
 });
+
+
+server.register(require('hapi-auth-jwt2'), function (err) {
+    if(err){
+        console.log(err);
+    }
+    server.auth.strategy('jwt', 'jwt',
+        { key: 'NeverShareYourSecret',          // Never Share your secret key TODO:PASS THIS IN AS process.env variable!!
+          validateFunc: require('./auth_jwt.js').validateFunc,            // validate function defined above
+          verifyOptions: { algorithms: [ 'HS256' ], ignoreExpiration: true } // pick a strong algorithm
+        }
+    );
+    server.auth.default('jwt');
+});
+
 
 //*********************************************************************************************************
 //**********************Test trigger for Hapi Bcrypt Salt*************************************************
