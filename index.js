@@ -53,8 +53,8 @@ server.route({
           path: '.',
           listing: true
       }
-        //var path = Path.join(request.params.user, request.params.file);
-        //return reply.file(path);
+        var path = Path.join(request.params.user, request.params.file);
+        return reply.file(path);
     }
 });
 
