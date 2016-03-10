@@ -31,8 +31,10 @@ server.route({
     method: 'GET',
     path: '/documents/{user}/{file}',
     handler: function(request, reply) {
-        var path = Path.join(request.params.user, request.params.file);
-        return reply.file(path);
+      directory: {
+          path: '.',
+          listing: false
+      }
     }
 });
 
