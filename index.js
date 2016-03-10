@@ -47,12 +47,12 @@ server.register(Inert, function () {});
 //Test trigger for Hapi Inert Dynamic Files
 server.route({
     method: 'GET',
-    path: '/documents/{user}/{file}',
+    path: '/documents/{path*}',
     //config: { auth: 'simple' },
     handler: function (request, reply) {
       directory: {
           path: './',
-          listing: false
+          listing: true
       }
         var path = Path.join(request.params.user, request.params.file);
         return reply.file(path);
