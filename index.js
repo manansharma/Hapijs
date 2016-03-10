@@ -32,11 +32,11 @@ server.register({
 
 //Case 2 - Multiple plugin register scenario
 //Test trigger for Hapi Server Session
-server.register([{
+server.register([/*{
       register: require('hapi-server-session'),
       options: {cookie:{isSecure: true, isHttpOnly: true},expiresIn: 90000000000000000000000000000}
-  }, {
-      register: require('inert'),
+  },*/ {
+      register: Inert,
       options: {}
   }], (err) => {
 });
