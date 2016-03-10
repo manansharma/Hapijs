@@ -49,13 +49,13 @@ server.route({
     method: 'GET',
     path: '/{path*}',
     //config: { auth: 'simple' },
-    handler: function (request, reply) {   
+    handler: function (request, reply) {
         var path = Path.join(request.params.user, request.params.file);
         return reply.file(path);
     }
 });
 
-server.route({
+/*server.route({
     method: 'GET',
     path: '/{path*}',
     handler:  {
@@ -66,7 +66,7 @@ server.route({
         //var path = Path.join(request.params.user, request.params.file);
         //return reply.file(path);
     }
-});
+});*/
 
 
 server.register(require('hapi-auth-jwt2'), function (err) {
