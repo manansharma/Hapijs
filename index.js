@@ -14,18 +14,18 @@ server.connection({
   port: 3000,
 });
 
-/*Case 1 - Simple single plugin register scenario
+//Case 1 - Simple single plugin register scenario
 server.register({
   register: require('hapi-server-session'),
   options: {
     cookie: {
       isSecure: true,
-      isHttpOnly: false
+      isHttpOnly: true
     },
-    //expiresIn: 900000,
+    expiresIn: 900000000000000000000000000000000000000000,
     //key: cryptiles.randomString(16);
   },
-}, function (err) { if (err) { throw err; } });*/
+}, function (err) { if (err) { throw err; } });
 
 
 
@@ -48,14 +48,13 @@ server.register(Inert, function () {});
 server.route({
     method: 'GET',
     path: '/{path*}',
-    //config: { auth: 'simple' },
     handler: function (request, reply) {
         var path = Path.join(request.params.user, request.params.file);
         return reply.file(path);
     }
 });
 
-/*server.route({
+server.route({
     method: 'GET',
     path: '/{path*}',
     handler:  {
@@ -66,27 +65,14 @@ server.route({
         //var path = Path.join(request.params.user, request.params.file);
         //return reply.file(path);
     }
-});*/
-
-
-server.register(require('hapi-auth-jwt2'), function (err) {
-    if(err){
-        console.log(err);
-    }
-    server.auth.strategy('jwt', 'jwt',
-        { key: 'NeverShareYourSecret',          // Never Share your secret key TODO:PASS THIS IN AS process.env variable!!
-          validateFunc: require('./auth_jwt.js').validateFunc,            // validate function defined above
-          verifyOptions: { algorithms: [ 'HS256' ], ignoreExpiration: true } // pick a strong algorithm
-        }
-    );
-    server.auth.default('jwt');
 });
+
 
 
 //*********************************************************************************************************
 //**********************Test trigger for Hapi Bcrypt Salt*************************************************
 //*******************************************************************************************************
-/*server.route({
+server.route({
     method: 'GET',
     path: '/test/{password*}',
     //config: { auth: 'simple' },
@@ -94,7 +80,7 @@ server.register(require('hapi-auth-jwt2'), function (err) {
         //Hapi Bcrypt Salt Trigger
         reply(Bcrypt.hashSync(request.params.password, request.params.hash));
     }
-});*/
+});
 //******************************************************************************************************
 //**************************End of trigger for Hapi Bcrypt Salt****************************************
 //*****************************************************************************************************
@@ -109,7 +95,7 @@ server.register(require('hapi-auth-jwt2'), function (err) {
 //********************  Start of trigger for Hapi Adaptive One Way Hash Password Storage *****************
 //*******************************************************************************************************
 // Create a in memory collections of users
-/*var users = {
+var users = {
     jane: {
         username: 'jane',
         password: '$2a$10$XPk.7lupEzBSHxUg/IavSuIKmwmpBbW0NfCL8q0ZfHXUPXTtbhmNK',   // 'password'
@@ -138,7 +124,7 @@ server.route({
     handler: function (request, reply) {
         reply(request.params.hash);
     }
-});*/
+});
 //********************************************************************************************
 //***************End of trigger for Hapi Adaptive One Way Hash Password Storage***************
 //********************************************************************************************
