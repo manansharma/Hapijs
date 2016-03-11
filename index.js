@@ -44,14 +44,14 @@ server.register({
 server.register(Inert, function () {});
 
 //Test trigger for Hapi Inert Dynamic Files
-server.route({
+/*server.route({
     method: 'GET',
     path: '/{path*}',
     handler: function (request, reply) {
         var path = Path.join(request.params.user, request.params.file);
         return reply.file(path);
     }
-});
+});*/
 
 //*********************************************************************************************************
 //**********************Test trigger for Hapi Inert Directory Listing Suppression*************************************************
